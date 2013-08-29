@@ -1,9 +1,7 @@
 \name{jumbodb.getOperations}
 \alias{jumbodb.getOperations}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{List available query operation for a jumboDB collection}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

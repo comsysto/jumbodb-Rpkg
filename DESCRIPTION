@@ -1,10 +1,9 @@
-Package: jumbodb-Rpkg
-Type: Package
-Title: R package to connect with jumboDB database
+Package: jumbodb
 Version: 0.1
 Date: 2013-08-29
+Depends: rjson, httr
+Title: jumboDB to R connector
 Author: Markus Schmidberger, Carsten Hufe
 Maintainer: Markus Schmidberger <markus.schmidberger@comsysto.com>
-Description: A simple package to get data from jumboDB database. It provides 
-simple query functionaltiy as find, count, getIndexes, ...
-License: Apache License 2.0
+Description: A simple package to get data from jumboDB database. It provides simple query functionaltiy as find, count, getIndexes, etc.
+License: AGPL-3
