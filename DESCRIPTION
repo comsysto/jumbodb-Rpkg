@@ -1,8 +1,8 @@
-Package: jumbodb
+Package: RjumboDB
 Version: 0.1
 Date: 2013-08-29
 Depends: rjson, httr
-Title: jumboDB to R connector
+Title: R connector to jumboDB
 Author: Markus Schmidberger, Carsten Hufe
 Maintainer: Markus Schmidberger <markus.schmidberger@comsysto.com>
 Description: A simple package to get data from jumboDB database. It provides simple query functionaltiy as find, count, getIndexes, etc.
