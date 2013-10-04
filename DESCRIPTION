@@ -1,6 +1,6 @@
 Package: RjumboDB
-Version: 0.1
-Date: 2013-08-29
+Version: 0.2
+Date: 2013-10-04
 Depends: rjson, httr
 Title: R connector to jumboDB
 Author: Markus Schmidberger, Carsten Hufe

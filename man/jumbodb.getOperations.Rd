@@ -1,83 +1,42 @@
 \name{jumbodb.getOperations}
 \alias{jumbodb.getOperations}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{List available query operation for a jumboDB collection}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+A function listing all available query options for the selected collection.
 }
 \usage{
 jumbodb.getOperations(host, collection, user = NULL, password = NULL, authenticate = "basic")
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
-  \item{host}{
-%%     ~~Describe \code{host} here~~
-}
-  \item{collection}{
-%%     ~~Describe \code{collection} here~~
-}
-  \item{user}{
-%%     ~~Describe \code{user} here~~
-}
-  \item{password}{
-%%     ~~Describe \code{password} here~~
-}
-  \item{authenticate}{
-%%     ~~Describe \code{authenticate} here~~
-}
+  \item{host}{the hostname}
+  \item{collection}{the collection name}
+  \item{user}{the user name for authentication}
+  \item{password}{the password for authentication}
+  \item{authenticate}{the http authentication (\link[httr]{authenticate}) method}
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+In some cases it will be usefull to know the available query operations on this collection.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+A vector of characters describing the different query operations.
 }
 \references{
-%% ~put references to the literature/web site here ~
+https://github.com/comsysto/jumbodb-Rpkg
+https://github.com/comsysto/jumbodb
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Markus Schmidberger; markus.schmidberger@comsysto.com
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (host, collection, user = NULL, password = NULL, authenticate = "basic") 
-{
-    require(httr)
-    require(rjson)
-    url <- paste(host, "/jumbodb/jumbodb/rest/query/collections", 
-        sep = "")
-    conf <- c(add_headers(Connection = "keep-alive"), accept_json())
-    if (!is.null(user) && !is.null(password)) {
-        conf <- append(conf, authenticate(user, password, authenticate))
-    }
-    out <- GET(url = url, config = conf)
-    out <- fromJSON(as.character(out))
-    collections <- sapply(out, function(x) {
-        return(x$collection)
-    })
-    id <- which(collections == collection)
-    ops <- out[[id]]$supportedOperations
-    return(ops)
-  }
+\dontrun{
+library(RjumboDB)
+host <- "localhost:8080"
+collection <- "test"
+jumbodb.getOperations(host, collection)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\keyword{ data }
+\keyword{ manip }
+\keyword{ database }
