@@ -16,6 +16,15 @@ function(host, collection, query='{"limit": 1}', user=NULL, password=NULL, authe
     conf <- append(conf, authenticate(user, password, authenticate))
   }
   
+  
+  # check if collection exists
+  try( col <- jumbodb.collections(host, user=user, password=password, authenticate=authenticate) )
+  if( length( which( collection == col) ) == 0 ){
+    stop("Collection not existing: ", collection)
+  }
+  
+  
+  # Ask JumbdoDB
   out <- "Comming soon"
   # ToDo
   

@@ -1,7 +1,9 @@
 jumbodb.collections <-
 function(host, user=NULL, password=NULL, authenticate="basic"){
+  
   require(httr)
   require(rjson)
+  options(show.error.messages = TRUE)
   
   #check host string
   if( !grepl("http", host) ){
@@ -16,7 +18,6 @@ function(host, user=NULL, password=NULL, authenticate="basic"){
   }
 
   # ask JumboDB
-  options(show.error.messages = TRUE)
   try( out <- GET(url = url, config = conf) )
   
   
