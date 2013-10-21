@@ -4,10 +4,10 @@
 \alias{RjumboDB}
 \docType{package}
 \title{
-R package to connect with the jumboDB database (\link{https://github.com/comsysto/jumbodb})
+R package to connect with the jumboDB database (\url{https://github.com/comsysto/jumbodb})
 }
 \description{
-A simple package to get data from jumboDB database (\link{https://github.com/comsysto/jumbodb}). It provides simple query functionaltiy 
+A simple package to get data from jumboDB database (\url{https://github.com/comsysto/jumbodb}). It provides simple query functionaltiy 
 as find, count, getIndexes, etc.
 }
 \details{

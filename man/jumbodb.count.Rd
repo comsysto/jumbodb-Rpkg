@@ -15,15 +15,9 @@ jumbodb.count(host, collection, query = "{\"limit\": 1}", user = NULL, password 
   \item{password}{the password for authentication}
   \item{authenticate}{the http authentication (\link{authenticate}) method}
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+a number giving the number of results
 }
 \references{
 https://github.com/comsysto/jumbodb-Rpkg

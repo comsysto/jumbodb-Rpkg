@@ -13,9 +13,7 @@ jumbodb.collections(host, user = NULL, password = NULL, authenticate = "basic")
   \item{password}{the password for authentication}
   \item{authenticate}{the http authentication (\link{authenticate}) method}
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 A list of names which are the collection names.
 }
