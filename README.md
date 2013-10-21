@@ -9,7 +9,7 @@ Package Installation
 ```R
 install.packages("devtools")
 library(devtools)
-install_github("jumbodb-Rpkg")
+install_github("jumbodb-Rpkg", username="comsysto")
 
 library(RjumboDB)
 ```
