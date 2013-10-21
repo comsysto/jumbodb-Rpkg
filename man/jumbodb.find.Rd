@@ -17,6 +17,46 @@ jumbodb.find(host, collection, query = "{\"limit\": 1}", user = NULL, password =
 }
 \details{
 Some query examples can be found here: https://github.com/comsysto/jumbodb/wiki/Twitter-Quick-Start
+
+There are basically two different kinds of query tasks: indexQuery and jsonQuery. Here are some 
+examples.
+
+\itemize{
+
+\item To get only one data set:
+
+\code{ query <- "{'limit': 1}" }
+
+\item To query a field with index:
+
+\code{query <- "{ 'indexQuery': [
+  {'name': 'date', 'clauses': [{'queryOperation': 'EQ', 'value': '20130301'} ]}
+],
+  'limit':10
+}"}
+
+\item To query a field without index:
+
+\code{query <- "{ 'jsonQuery': [
+  {'name': 'city', 'clauses': [{'queryOperation': 'EQ', 'value': 'Munich'} ]}
+],
+  'limit':10
+}"}
+
+
+\item To query for several criterias (you can do the same with an indexQuery):
+
+\code{query <- '{
+  "jsonQuery": [
+      {"fieldName": "date", "clauses": [
+        {"queryOperation": "EQ", "value": 20130301}, 
+        {"queryOperation": "EQ", "value": 20130302}]},
+      {"fieldName": "city.size", "clauses": [{"queryOperation": "GT", "value": 400}]}
+    ]
+}'}
+
+}
+
 }
 \value{
 An R object (mostly list) of the query result.
