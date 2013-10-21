@@ -16,11 +16,26 @@ function(host, collection, user=NULL, password=NULL, authenticate="basic"){
     conf <- append(conf, authenticate(user, password, authenticate))
   }
   
-  out <- GET(url = url, config = conf)
-  out <- fromJSON(as.character(out))
-  collections <- sapply(out, function(x){return(x$collection)})
-  id <- which(collections==collection)
-  ops <- out[[id]]$supportedOperations
   
+  # ask JumboDB
+  options(show.error.messages = TRUE)
+  try( out <- GET(url = url, config = conf) )
+  
+  
+  # check output for JSON
+  if( class(out) =="response" && substr(out, 1, 6) =="<html>" ){
+    # HTML
+    out <- out$status_code
+    stop("HTTP Error: ", out)
+  } else if ( substr(out, 1, 2) =="[{" ){
+    # JSON - everything fine
+    out <- fromJSON(as.character(out))
+    collections <- sapply(out, function(x){return(x$collection)})
+    id <- which(collections==collection)
+    ops <- out[[id]]$supportedOperations
+  } else {
+    stop("WRONG output format from JumboDB: ", out)
+  } 
+    
   return(ops)
 }

@@ -15,8 +15,23 @@ function(host, collection, query='{"limit": 1}', user=NULL, password=NULL, authe
     conf <- append(conf, authenticate(user, password, authenticate))
   }
   
-  out <- POST(url = url, config = conf, body = query)
-  out <- fromJSON(as.character(out))
+  
+  # ask JumboDB
+  options(show.error.messages = TRUE)
+  try( out <- POST(url = url, config = conf, body = query) )
+  
+  
+  #check output for JSON
+  if( class(out) =="response" && substr(out, 1, 6) =="<html>" ){
+    # HTML
+    out <- out$status_code
+    stop("HTTP Error: ", out)
+  } else if ( substr(out, 1, 2) =="[{" ){
+    # JSON - everything fine
+    out <- fromJSON(as.character(out))
+  } else {
+    stop("WRONG output format from JumboDB: ", out)
+  } 
   
   return(out$results)
 }

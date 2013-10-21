@@ -15,9 +15,23 @@ function(host, user=NULL, password=NULL, authenticate="basic"){
     conf <- append(conf, authenticate(user, password, authenticate))
   }
 
-  out <- GET(url = url, config = conf)
-  out <- fromJSON(as.character(out))
-  out <- sapply(out, function(x){return(x$collection)})
+  # ask JumboDB
+  options(show.error.messages = TRUE)
+  try( out <- GET(url = url, config = conf) )
+  
+  
+  #check output for JSON
+  if( class(out) =="response" && substr(out, 1, 6) =="<html>" ){
+    # HTML
+    out <- out$status_code
+    stop("HTTP Error: ", out)
+  } else if ( substr(out, 1, 2) =="[{" ){
+    # JSON - everything fine
+    out <- fromJSON(as.character(out))
+    out <- sapply(out, function(x){return(x$collection)})
+  } else {
+    stop("WRONG output format from JumboDB: ", out)
+  } 
   
   return(out)
 }
