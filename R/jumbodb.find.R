@@ -34,7 +34,7 @@ function(host, collection, query='{"limit": 1}', user=NULL, password=NULL, authe
     # HTML
     out <- out$status_code
     stop("HTTP Error: ", out)
-  } else if ( substr(out, 1, 2) =="[{" ){
+  } else if ( substr(out, 1, 2) =="[{" || substr(out, 1, 1) =="{" ){
     # JSON - everything fine
     out <- fromJSON(as.character(out))
   } else {

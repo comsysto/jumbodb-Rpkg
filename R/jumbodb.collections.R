@@ -26,7 +26,7 @@ function(host, user=NULL, password=NULL, authenticate="basic"){
     # HTML
     out <- out$status_code
     stop("HTTP Error: ", out)
-  } else if ( substr(out, 1, 2) =="[{" ){
+  } else if ( substr(out, 1, 2) =="[{" || substr(out, 1, 1) =="{" ){
     # JSON - everything fine
     out <- fromJSON(as.character(out))
     out <- sapply(out, function(x){return(x$collection)})
