@@ -32,8 +32,7 @@ function(host, collection, query='{"limit": 1}', user=NULL, password=NULL, authe
   #check output for JSON
   if( class(out) =="response" && substr(out, 1, 6) =="<html>" ){
     # HTML
-    out <- out$status_code
-    stop("HTTP Error: ", out)
+    stop("HTTP Error: ", out$status_code)
   } else if ( substr(out, 1, 2) =="[{" || substr(out, 1, 1) =="{" ){
     # JSON - everything fine
     out <- fromJSON(as.character(out))
@@ -41,5 +40,14 @@ function(host, collection, query='{"limit": 1}', user=NULL, password=NULL, authe
     stop("WRONG output format from JumboDB: ", out)
   } 
   
-  return(out$results)
+  # Check for query error
+  if( is.null( out$message ) ){
+    # everything is fine
+    out <- out$results
+  } else {
+    # error in query
+    stop("Error in query: ", out$message)
+  }
+  
+  return(out)
 }

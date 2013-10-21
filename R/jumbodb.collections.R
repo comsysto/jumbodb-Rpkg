@@ -10,9 +10,9 @@ function(host, user=NULL, password=NULL, authenticate="basic"){
     stop("http is missing in host")
   }
   
+  # create query
   url <- paste(host, '/jumbodb/jumbodb/rest/query/collections', sep="")
   conf <- c(add_headers(Connection = "keep-alive"), accept_json())
-  
   if( !is.null(user) && !is.null(password) ){
     conf <- append(conf, authenticate(user, password, authenticate))
   }
